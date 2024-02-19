@@ -1,7 +1,7 @@
 import random, json
 SEATS = 4
 
-candidates = ["a", "b", "c", "d", "e", "f"]
+candidates = ["candidate1", "candidate2", "candidate3", "candidate4", "candidate5"]
 
 file = open("votes.json", "r")
 inputBallots = json.loads(file.readline())
