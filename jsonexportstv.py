@@ -1,7 +1,7 @@
-import random, json
+import json
 SEATS = 4
 
-candidates = ["candidate1", "candidate2", "candidate3", "candidate4", "candidate5"]
+candidates = ["a", "b", "c", "d", "e", "f"]
 
 file = open("votes.json", "r")
 inputBallots = json.loads(file.readline())
@@ -34,17 +34,17 @@ while len(elected) < SEATS:
     for i in currentVotes:
         candidateVotes[i] += 1
     
-    for i in candidateVotes:
-        if i > quota:
-            # elect candidate
-            
-            elected.append(highestCandidate)
+    highestCandidate = max(candidateVotes, key=candidateVotes.get)
+    if candidateVotes[highestCandidate] > quota:
+        # elect candidate
+        
+        elected.append(highestCandidate)
 
-            # transfer vote after election, prepared for next round
-            
-            for i in ballots:
-                if highestCandidate in i:
-                    i.remove(highestCandidate)
+        # transfer vote after election, prepared for next round
+        
+        for i in ballots:
+            if highestCandidate in i:
+                i.remove(highestCandidate)
 
     else:
         # there are no votes to transfer, eliminate least popular candidate and transfer their votes (next round)
